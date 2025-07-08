@@ -1,0 +1,13 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+debug.log
+npm-debug.log
+
+# Pastas temporárias
+node_modules/
+dist/
+build/
+.env 

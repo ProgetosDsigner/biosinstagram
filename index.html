@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bio Minimalista Instagram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #18181b;
+      color: #fafafa;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: #23232b;
+      border-radius: 2rem;
+      box-shadow: 0 4px 32px #0006;
+      padding: 2.5rem 2rem 2rem 2rem;
+      max-width: 350px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .profile-pic {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b3b4b;
+      box-shadow: 0 2px 12px #0004;
+    }
+    .name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .desc {
+      font-size: 1rem;
+      color: #b3b3c6;
+      text-align: center;
+      margin: 0;
+    }
+    .whatsapp-box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .whatsapp-box textarea {
+      background: #18181b;
+      color: #fafafa;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.8rem;
+      font-size: 1rem;
+      resize: none;
+      min-height: 70px;
+      outline: none;
+      box-shadow: 0 1px 4px #0002;
+      transition: box-shadow 0.2s;
+    }
+    .whatsapp-box textarea:focus {
+      box-shadow: 0 2px 8px #0004;
+    }
+    .whatsapp-box button {
+      background: linear-gradient(90deg, #25d366 60%, #128c7e 100%);
+      color: #fff;
+      border: none;
+      border-radius: 0.7rem;
+      padding: 0.7rem 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px #128c7e33;
+    }
+    .whatsapp-box button:hover {
+      background: linear-gradient(90deg, #128c7e 60%, #25d366 100%);
+      transform: translateY(-2px) scale(1.03);
+    }
+    @media (max-width: 400px) {
+      .container {
+        padding: 1.2rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="profile-pic" src="https://i.imgur.com/5vtSwnz.jpg" alt="Foto de Perfil">
+    <h1 class="name">DM Artes</h1>
+    <p class="desc" style="white-space: pre-line;">🎨 Design Criativo + 🤖 IA na Prática
+📲 Dicas de Social Mídia que Convertem
+⚡️ Transforme ideias em resultados com tecnologia</p>
+    <div style="display: flex; gap: 1.2rem; margin-bottom: 0.5rem;">
+      <a href="https://www.instagram.com/diomar_melo/" target="_blank" style="text-decoration:none; color:#fafafa; background:#262630; padding:0.5rem 1.1rem; border-radius:1rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; transition:background 0.2s;">Instagram</a>
+      <a href="https://www.youtube.com/@dmartes9839" target="_blank" style="text-decoration:none; color:#fafafa; background:#262630; padding:0.5rem 1.1rem; border-radius:1rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; transition:background 0.2s;">YouTube</a>
+    </div>
+    <form class="whatsapp-box" onsubmit="enviarWhatsapp(event)">
+      <textarea id="mensagem" placeholder="Digite sua mensagem para o WhatsApp..."></textarea>
+      <button type="submit">Enviar para WhatsApp</button>
+    </form>
+    <div style="width:100%; margin-top:2rem;">
+      <h2 style="font-size:1.1rem; color:#b3b3c6; margin-bottom:0.7rem; text-align:center; font-weight:600;">Galeria dos meus trabalhos</h2>
+      <div id="galeria" style="display:grid; grid-template-columns:1fr; gap:1.2rem; justify-items:center;">
+        <!-- Adicione suas imagens abaixo, exemplo: -->
+        <!-- <img src="fotos/trabalho1.jpg" alt="Trabalho 1" style="width:100%; max-width:320px; aspect-ratio:4/5; object-fit:cover; border-radius:1.2rem; box-shadow:0 2px 12px #0004;"> -->
+      </div>
+      <div style="margin-top:1rem; text-align:center;">
+        <label for="upload" style="cursor:pointer; color:#25d366; font-weight:600;">Adicionar nova foto</label>
+        <input type="file" id="upload" accept="image/*" style="display:none;" onchange="adicionarFoto(event)">
+      </div>
+      <div style="display:flex; justify-content:center; gap:1.2rem; margin:2rem 0 1rem 0;">
+        <button onclick="curtir()" title="Curtir" style="background:#23232b; border:none; border-radius:1rem; padding:0.7rem 1.1rem; color:#fafafa; font-size:1.1rem; display:flex; align-items:center; gap:0.5rem; cursor:pointer; box-shadow:0 2px 8px #0002; transition:background 0.2s;"><span style="font-size:1.3rem;">❤️</span> Curtir</button>
+        <button onclick="compartilhar()" title="Compartilhar" style="background:#23232b; border:none; border-radius:1rem; padding:0.7rem 1.1rem; color:#fafafa; font-size:1.1rem; display:flex; align-items:center; gap:0.5rem; cursor:pointer; box-shadow:0 2px 8px #0002; transition:background 0.2s;"><span style="font-size:1.3rem;">🔗</span> Compartilhar</button>
+        <button onclick="salvar()" title="Salvar" style="background:#23232b; border:none; border-radius:1rem; padding:0.7rem 1.1rem; color:#fafafa; font-size:1.1rem; display:flex; align-items:center; gap:0.5rem; cursor:pointer; box-shadow:0 2px 8px #0002; transition:background 0.2s;"><span style="font-size:1.3rem;">💾</span> Salvar</button>
+      </div>
+      <div style="display:flex; justify-content:center; gap:1.2rem; margin-bottom:1.5rem;">
+        <a href="https://www.instagram.com/diomar_melo/" target="_blank" title="Instagram" style="color:#fafafa; font-size:2rem; text-decoration:none;"><span style="font-family:Arial;">&#x1F465;</span></a>
+        <a href="https://www.youtube.com/@dmartes9839" target="_blank" title="YouTube" style="color:#fafafa; font-size:2rem; text-decoration:none;"><span style="font-family:Arial;">&#x1F4FA;</span></a>
+        <a href="https://facebook.com/" target="_blank" title="Facebook" style="color:#fafafa; font-size:2rem; text-decoration:none;"><span style="font-family:Arial;">&#x1F426;</span></a>
+        <a href="https://tiktok.com/" target="_blank" title="TikTok" style="color:#fafafa; font-size:2rem; text-decoration:none;"><span style="font-family:Arial;">&#x1F3A4;</span></a>
+      </div>
+    </div>
+  </div>
+  <script>
+    function enviarWhatsapp(e) {
+      e.preventDefault();
+      const mensagem = document.getElementById('mensagem').value.trim();
+      if (!mensagem) {
+        alert('Digite uma mensagem antes de enviar!');
+        return;
+      }
+      const numero = '99991342308';
+      const url = `https://wa.me/55${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    }
+    function adicionarFoto(e) {
+      const galeria = document.getElementById('galeria');
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        const img = document.createElement('img');
+        img.src = ev.target.result;
+        img.alt = 'Trabalho';
+        img.style.width = '100%';
+        img.style.maxWidth = '320px';
+        img.style.aspectRatio = '4/5';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '1.2rem';
+        img.style.boxShadow = '0 2px 12px #0004';
+        galeria.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    }
+    function curtir() {
+      alert('Você curtiu!');
+    }
+    function compartilhar() {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          url: window.location.href
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert('Link copiado para a área de transferência!');
+      }
+    }
+    function salvar() {
+      alert('Página salva nos favoritos! (adicione manualmente pelo navegador)');
+    }
+  </script>
+</body>
+</html> 
